@@ -16,7 +16,6 @@ export async function createVectorStore(vStoreName) {
   const vectorStore = await openai.beta.vectorStores.create({
     name: vStoreName,
   });
-  console.log(vectorStore);
   return vectorStore;
 }
 
@@ -30,9 +29,9 @@ export async function uploadAndPollVector(vectorStore, fileStreams) {
   return response;
 }
 
-export async function updateAssistant(assistantId, vectorStoreId) {
-  const response = await openai.beta.assistants.update(assistantId, {
-    tool_resources: { file_search: { vector_store_ids: [vectorStoreId] } },
+export async function updateAssistant(assistant, vectorStore) {
+  const response = await openai.beta.assistants.update(assistant.id, {
+    tool_resources: { file_search: { vector_store_ids: [vectorStore.id] } },
   });
   console.log("Assistant updated:", response);
   return response;
@@ -57,6 +56,7 @@ export async function createThread() {
   const emptyThread = await openai.beta.threads.create();
 
   console.log(emptyThread);
+  return emptyThread;
 }
 
 export async function createMessagesThread(threadID, userContentMessage) {

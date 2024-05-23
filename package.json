@@ -32,7 +32,7 @@
   "name": "assistantapi",
   "version": "1.0.0",
   "scripts": {
-    "start": "parcel index.html --port 3000"
+    "start": "parcel index.html"
   },
   "author": "",
   "license": "ISC",

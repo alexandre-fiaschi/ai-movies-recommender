@@ -7,7 +7,6 @@ import {
   retrieveRun,
   listMessages,
 } from "./assistantHelpers.js";
-
 //Node.js if run as server BE
 
 // const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -39,7 +38,6 @@ export const reply = document.querySelector(".reply");
 // Assistant variables
 const asstID = "asst_MVXM0pEQX2GKX74jEAxsKgdW";
 const threadID = "thread_Bf4Ad6rjo6eUcPdmiLLuyYN4";
-// const runID = "run_VvUhOvy0S1wY8stlPES6IkXT";
 
 // Main Code
 async function main() {
@@ -51,6 +49,7 @@ async function main() {
   //Run
   const run = await runThread(threadID, asstID);
 
+  // Before setting the last message we need polling since the assistant didnt have enough time to process the run, we need to preiodically send request to see if the run is completed
   // Retrieve the current run to check for status update
   let currentRun = await retrieveRun(threadID, run.id);
   // Poll for updates and check if run status is completed ((UPDATES: OpenAI plan to support streaming soon))
@@ -63,8 +62,6 @@ async function main() {
   // Get messages from the thread
   const { data } = await listMessages(threadID);
   console.log(data);
-
-  //before setting the last message we need polling since the assistant didnt have enough time to process the run, we need to preiodically send request to see if the run is completed
 
   // Display the last message for the current run
   reply.innerHTML = data[0].content[0].text.value;
