@@ -2,7 +2,6 @@ Simple AI Movie Recommender Chat
 
 - App created for learning and experimenting with OpenAI Assistant API
 - Uses a text file with a list of movies and description to create a vector store to feed to the agent as tool resource using file_search (done in the Node.js file). This process will split the text and create vector embeddings of each chunk.
-- We create a main thread
 - Once the setup with the file retrieval and the thread are ready we wait for user input and update the created thread with user messages and run the thread waiting for the assistant response which will be rendered to the DOM
 - Written in JS, HTML & CSS
 - Mockup Inspired by Online Course
